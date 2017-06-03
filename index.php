@@ -1,26 +1,18 @@
 <?php
 
-	include 'simple_html_dom.php';
+include 'simple_html_dom.php';
 
-	// Create DOM from URL or file
+// Create DOM from URL or file.
 $html = file_get_html('http://www.bomberosperu.gob.pe/po_diario.asp');
-
-// Find all images 
-
-$images = $html->find('img');
-
-/*
-foreach( $images as $element) { 
-  print $element->src;
-
-}
-
-*/
 
 // Find all links 
 
-$link = $html->find('tr.tITULO div[align=left] span.tITULO');
+$data = [];
+// Find all article blocks
+$i = 0;
+$img = $html->find('img');
 
-foreach($link as $element) {
-  print_r($element);
+foreach ($img as $item) {
+  $data[] = $item->src;
 }
+print_r($data);

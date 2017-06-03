@@ -24,23 +24,25 @@
    };
 
    render() {
+     console.log(this.props.data);
+     /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
       <TouchableWithoutFeedback onPress={this._onClick} >
          <View style={styles.row}>
-
            <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
-           <Text style={styles.text}>
-             {this.props.data.text + ' (' + this.props.data.clicks + ' clicks)'}
+           <Text style={styles.emergency_type}>
+             {this.props.data.emergency_type}
            </Text>
            <Text style={styles.address}>
-             'AV. CERRO CAMACHO 880 SANTIAGO DE SURCO'
+             {this.props.data.address}
            </Text>
-           <Text>
-             'Estado: Atendiendo'
+           <Text style={styles.status}>
+             {this.props.data.status}
            </Text>
-           <Text>
-             ' 03/06/2017 09:53:42 a.m.'
+           <Text style={styles.created}>
+             {this.props.data.created}
            </Text>
+
 
          </View>
        </TouchableWithoutFeedback>
@@ -57,7 +59,15 @@ export default class bomberos extends React.Component {
     loaded: 0,
     stars: '?',
     rowData: Array.from(new Array(2)).map(
-      (val, i) => ({text: 'Initial row ' + i, clicks: 0})),
+      (val, i) => (
+        {
+          text: 'Initial row ' + i,
+          address: 'AV. CERRO CAMACHO 880 SANTIAGO DE SURCO',
+          emergency_type: 'EMERGENCIA MEDICA',
+          status: 'ATENDIENDO',
+          created: '03/06/2017 09:53:42 a.m.',
+        }
+      )),
   };
 
   _onClick = (row) => {
@@ -133,16 +143,22 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 5,
   },
-  text: {
-    alignSelf: 'center',
-    color: '#fff',
-  },
   scrollview: {
     flex: 1,
   },
   address: {
+    alignSelf: 'center',
     color: 'red',
-  }
+  },
+  emergency_type: {
+    color: 'red',
+  },
+  status: {
+    color: 'red',
+  },
+  created: {
+    color: 'red',
+  },
 });
 
 AppRegistry.registerComponent('bomberos', () => bomberos);
