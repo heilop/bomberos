@@ -61,7 +61,6 @@ export default class bomberos extends React.Component {
     rowData: Array.from(new Array(2)).map(
       (val, i) => (
         {
-          text: 'Initial row ' + i,
           address: 'AV. CERRO CAMACHO 880 SANTIAGO DE SURCO',
           emergency_type: 'EMERGENCIA MEDICA',
           status: 'ATENDIENDO',
