@@ -10,9 +10,9 @@ $html = file_get_html('http://www.bomberosperu.gob.pe/po_diario.asp');
 $data = [];
 // Find all article blocks
 $i = 0;
-$img = $html->find('img');
+$tr = $html->find('tr.TextoContenido');
 
-foreach ($img as $item) {
-  $data[] = $item->src;
+foreach ($tr as $item) {
+  $data[] = $item->find('td div', 3)->plaintext;
 }
 print_r($data);
