@@ -80,7 +80,7 @@
        'incendio': require('./images/incendio.png'),
        'materiales-peligrosos': require('./images/materiales-peligrosos.png'),
        'rescate': require('./images/rescate.png'),
-       'servicios-especial': require('./images/servicios-especial.png'),
+       'servicios-especial': require('./images/servicio-especial.png'),
      };
      /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
