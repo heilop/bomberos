@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
- const URL = 'https://api.github.com/repos/facebook/react-native';
+ const URL = 'http://bomberos.devstec.com/data.json';
  const React = require('react');
  const ReactNative = require('react-native');
  const {
@@ -13,7 +13,8 @@
    Text,
    TouchableWithoutFeedback,
    View,
-   Image
+   Image,
+   Linking
  } = ReactNative;
 
  import { AppRegistry } from 'react-native';
@@ -24,7 +25,7 @@
    };
 
    render() {
-     console.log(this.props.data);
+     const machines = this.props.data.machines.toString();
      /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
       <TouchableWithoutFeedback onPress={this._onClick} >
@@ -42,7 +43,9 @@
            <Text style={styles.created}>
              {this.props.data.created}
            </Text>
-
+           <Text style={styles.machines}>
+             {machines}
+           </Text>
 
          </View>
        </TouchableWithoutFeedback>
@@ -58,14 +61,19 @@ export default class bomberos extends React.Component {
     isRefreshing: false,
     loaded: 0,
     stars: '?',
-    rowData: Array.from(new Array(2)).map(
+    rowData: Array.from(new Array(1)).map(
       (val, i) => (
         {
-          text: 'Initial row ' + i,
           address: 'AV. CERRO CAMACHO 880 SANTIAGO DE SURCO',
           emergency_type: 'EMERGENCIA MEDICA',
           status: 'ATENDIENDO',
           created: '03/06/2017 09:53:42 a.m.',
+          number: "2017-028208",
+          machines: ["AMB124-2", "AMB-96"],
+          map: {
+            "latitude": -76.9623405856671,
+            "longitude": -12.0858319188482
+          }
         }
       )),
   };
@@ -74,6 +82,15 @@ export default class bomberos extends React.Component {
     row.clicks++;
     this.setState({
       rowData: this.state.rowData,
+    });
+    //let url = 'waze://app';
+    let url = 'waze://?ll=40.761043, -73.980545&navigate=yes"';
+    Linking.canOpenURL(url).then(supported => {
+          if (supported) {
+            Linking.openURL(url);
+          } else {
+            console.log('Don\'t know how to open URI: ' + url);
+          }
     });
   };
 
@@ -86,8 +103,9 @@ export default class bomberos extends React.Component {
   async fetchData() {
     const response = await fetch(URL)
     const json = await response.json()
-    const stars = json.stargazers_count
-    this.setState({stars})
+    console.log(json);
+
+    this.setState({rowData: json})
   }
 
   render() {
@@ -108,10 +126,6 @@ export default class bomberos extends React.Component {
             progressBackgroundColor="#ffff00"
           />
         }>
-        <Text>
-          YOOO
-          React Native has {this.state.stars} stars
-        </Text>
         {rows}
       </ScrollView>
     );
@@ -157,6 +171,9 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   created: {
+    color: 'red',
+  },
+  machines: {
     color: 'red',
   },
 });
