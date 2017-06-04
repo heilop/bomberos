@@ -38,14 +38,14 @@
      const machines = this.props.data.machines.toString();
      /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
-      <TouchableWithoutFeedback onPress={this._onClick} >
+      <TouchableWithoutFeedback onPress={this._onClick}>
          <View style={styles.row}>
           <View style={style.content}>
            <View >
             <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
            </View>
            <View style={style.padding_left}>
-             <Text style={styles.emergency_type}>
+             <Text style={style.emergency_type}>
                {this.props.data.emergency_type}
              </Text>
              <Text style={styles.address}>
@@ -167,9 +167,11 @@ export default class bomberos extends React.Component {
 
 const styles = StyleSheet.create({
   row: {
-    borderWidth: 1,
+    borderWidth: 3,
     padding: 20,
     margin: 5,
+    borderRadius: 10,
+    borderColor: 'red',
   },
   scrollview: {
     flex: 1,
