@@ -14,7 +14,7 @@ foreach ($tr as $item) {
   $emergency['number'] = _format_string($item->find('td div', 1)->plaintext);
   $emergency['created'] = _format_string($item->find('td div', 2)->plaintext);
   $emergency['address'] = _format_string($item->find('td div', 3)->plaintext);
-  $emergency['emergency_type'] = _format_string($item->find('td div', 4)->plaintext);
+  $emergency['emergency_type'] = str_replace(" (INCIDENTE)", "", _format_string($item->find('td div', 4)->plaintext));
   $emergency['status'] = _format_string($item->find('td div', 5)->plaintext);
   $emergency['machines'] = explode(' ', _format_string($item->find('td div', 6)->plaintext));
   $content = explode("'", $item->find('td img', 0)->onclick);
@@ -42,6 +42,6 @@ function _format_string($content) {
 }
 
 function _format_lat($content) {
-  $content = preg_replace("/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/", "", $content);  
+  $content = preg_replace("/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/", "", $content);
   return $content;
 }
