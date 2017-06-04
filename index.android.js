@@ -80,11 +80,10 @@ export default class bomberos extends React.Component {
 
   _onClick = (row) => {
     row.clicks++;
-    this.setState({
-      rowData: this.state.rowData,
-    });
+    console.log(row);
     //let url = 'waze://app';
-    let url = 'waze://?ll=40.761043, -73.980545&navigate=yes"';
+    let url = `waze://?ll=${row.map.longitude},${row.map.latitude}&navigate=yes`;
+    console.log(url);
     Linking.canOpenURL(url).then(supported => {
           if (supported) {
             Linking.openURL(url);
