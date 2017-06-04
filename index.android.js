@@ -27,6 +27,42 @@
 
       padding_left: {
           paddingLeft:15,
+      },
+
+      emergency_type: {
+        color:'red',
+        fontWeight: '700',
+        textAlign:'center',
+        fontSize: 24
+      },
+
+      padding_top: {
+          paddingTop: 20
+      },
+
+      address: {
+        color:'black'
+      },
+
+      created: {
+        color:'black'
+      },
+
+      status: {
+        color:'black',
+        fontWeight: '700',
+        textAlign:'center',
+        fontSize: 18,
+        paddingBottom: 5
+      },
+
+      machines: {
+        color:'black',
+      },
+
+      text_center: {
+        textAlign:'center',
+        paddingLeft: 20
       }
   });
  class Row extends React.Component {
@@ -41,23 +77,23 @@
       <TouchableWithoutFeedback onPress={this._onClick}>
          <View style={styles.row}>
           <View style={style.content}>
-           <View >
+           <View style={style.padding_top}>
             <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
            </View>
-           <View style={style.padding_left}>
+           <View style={style.text_center}>
              <Text style={style.emergency_type}>
                {this.props.data.emergency_type}
              </Text>
-             <Text style={styles.address}>
-               {this.props.data.address}
-             </Text>
-             <Text style={styles.status}>
+             <Text style={style.status}>
                {this.props.data.status}
              </Text>
-             <Text style={styles.created}>
+             <Text style={style.address}>
+               {this.props.data.address}
+             </Text>
+             <Text style={style.created}>
                {this.props.data.created}
              </Text>
-             <Text style={styles.machines}>
+             <Text style={style.machines}>
                {machines}
              </Text>
            </View>
@@ -171,7 +207,7 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 5,
     borderRadius: 10,
-    borderColor: 'red',
+    borderColor: '#FF620E',
   },
   scrollview: {
     flex: 1,
