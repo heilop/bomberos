@@ -13,7 +13,8 @@
    Text,
    TouchableWithoutFeedback,
    View,
-   Image
+   Image,
+   Linking
  } = ReactNative;
 
  import { AppRegistry } from 'react-native';
@@ -60,7 +61,7 @@ export default class bomberos extends React.Component {
     isRefreshing: false,
     loaded: 0,
     stars: '?',
-    rowData: Array.from(new Array(2)).map(
+    rowData: Array.from(new Array(1)).map(
       (val, i) => (
         {
           address: 'AV. CERRO CAMACHO 880 SANTIAGO DE SURCO',
@@ -81,6 +82,15 @@ export default class bomberos extends React.Component {
     row.clicks++;
     this.setState({
       rowData: this.state.rowData,
+    });
+    //let url = 'waze://app';
+    let url = 'waze://?ll=40.761043, -73.980545&navigate=yes"';
+    Linking.canOpenURL(url).then(supported => {
+          if (supported) {
+            Linking.openURL(url);
+          } else {
+            console.log('Don\'t know how to open URI: ' + url);
+          }
     });
   };
 
