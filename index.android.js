@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
- const URL = 'http://bomberos.devstec.com/data.json';
+ const URL = 'http://bomberos.devstec.com';
  const React = require('react');
  const ReactNative = require('react-native');
  const {
