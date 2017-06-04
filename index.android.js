@@ -19,6 +19,16 @@
 
  import { AppRegistry } from 'react-native';
 
+ var style = StyleSheet.create({
+      content:{
+          flex:1,
+          flexDirection: 'row'
+      },
+
+      padding_left: {
+          paddingLeft:15,
+      }
+  });
  class Row extends React.Component {
    _onClick = () => {
      this.props.onClick(this.props.data);
@@ -30,10 +40,11 @@
      return (
       <TouchableWithoutFeedback onPress={this._onClick} >
          <View style={styles.row}>
-           <View>
+          <View style={style.content}>
+           <View >
             <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
            </View>
-           <View>
+           <View style={style.padding_left}>
              <Text style={styles.emergency_type}>
                {this.props.data.emergency_type}
              </Text>
@@ -49,6 +60,7 @@
              <Text style={styles.machines}>
                {machines}
              </Text>
+           </View>
            </View>
          </View>
        </TouchableWithoutFeedback>
