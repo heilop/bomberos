@@ -13,6 +13,7 @@ $map = [];
 
 $tr = $html->find('tr.TextoContenido');
 $img = $html->find('img');
+$replace = array("\r\n", '&nbsp;');
 
 foreach ($tr as $item) {
   $data['id'] = $item->find('td div', 0)->plaintext;
@@ -22,6 +23,14 @@ foreach ($tr as $item) {
   $data['emergency_type'] = $item->find('td div', 4)->plaintext;
   $data['status'] = $item->find('td div', 5)->plaintext;
   $data['machines'] = $item->find('td div', 6)->plaintext;
+
+  //$pizza  = "porción1 porción2 porción3 porción4 porción5 porción6";
+  $machines = explode(" ", $data['machines']);
+
+  //print_r(str_replace("&nbsp;&nbsp;", "",$machines));
+
+  $json = json_encode(str_replace($replace, "",$machines));
+  print_r($json);
 
   foreach( $img as $element) {
   	$map['lat'] = $element->src;
@@ -33,5 +42,5 @@ foreach ($tr as $item) {
 
   $json = json_encode(str_replace("&nbsp;", "",$data));
 
-  print_r($json);
+  //print_r($json);
 }  
