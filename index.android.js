@@ -72,13 +72,18 @@
 
    render() {
      const machines = this.props.data.machines.toString();
+     const emergency_type = this.props.data.emergency_type.replace(/\s+/g, '-').toLowerCase();
+     console.log(emergency_type);
+     const emergency_type_image_src = `./images/${emergency_type}.png`;
+     var src = './images/emergencia-medica.png';
+
      /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
       <TouchableWithoutFeedback onPress={this._onClick}>
          <View style={styles.row}>
           <View style={style.content}>
            <View style={style.padding_top}>
-            <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
+            <Image source={require(src)} style={{width: 50, height: 50}}/>
            </View>
            <View style={style.text_center}>
              <Text style={style.emergency_type}>
