@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
- const URL = 'https://api.github.com/repos/facebook/react-native';
+ const URL = 'http://bomberos.devstec.com/data.json';
  const React = require('react');
  const ReactNative = require('react-native');
  const {
@@ -24,7 +24,7 @@
    };
 
    render() {
-     console.log(this.props.data);
+     const machines = this.props.data.machines.toString();
      /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
      return (
       <TouchableWithoutFeedback onPress={this._onClick} >
@@ -42,7 +42,9 @@
            <Text style={styles.created}>
              {this.props.data.created}
            </Text>
-
+           <Text style={styles.machines}>
+             {machines}
+           </Text>
 
          </View>
        </TouchableWithoutFeedback>
@@ -65,6 +67,12 @@ export default class bomberos extends React.Component {
           emergency_type: 'EMERGENCIA MEDICA',
           status: 'ATENDIENDO',
           created: '03/06/2017 09:53:42 a.m.',
+          number: "2017-028208",
+          machines: ["AMB124-2", "AMB-96"],
+          map: {
+            "latitude": -76.9623405856671,
+            "longitude": -12.0858319188482
+          }
         }
       )),
   };
@@ -85,8 +93,9 @@ export default class bomberos extends React.Component {
   async fetchData() {
     const response = await fetch(URL)
     const json = await response.json()
-    const stars = json.stargazers_count
-    this.setState({stars})
+    console.log(json);
+
+    this.setState({rowData: json})
   }
 
   render() {
@@ -107,10 +116,6 @@ export default class bomberos extends React.Component {
             progressBackgroundColor="#ffff00"
           />
         }>
-        <Text>
-          YOOO
-          React Native has {this.state.stars} stars
-        </Text>
         {rows}
       </ScrollView>
     );
@@ -156,6 +161,9 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   created: {
+    color: 'red',
+  },
+  machines: {
     color: 'red',
   },
 });
