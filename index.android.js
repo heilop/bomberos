@@ -30,23 +30,26 @@
      return (
       <TouchableWithoutFeedback onPress={this._onClick} >
          <View style={styles.row}>
-           <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
-           <Text style={styles.emergency_type}>
-             {this.props.data.emergency_type}
-           </Text>
-           <Text style={styles.address}>
-             {this.props.data.address}
-           </Text>
-           <Text style={styles.status}>
-             {this.props.data.status}
-           </Text>
-           <Text style={styles.created}>
-             {this.props.data.created}
-           </Text>
-           <Text style={styles.machines}>
-             {machines}
-           </Text>
-
+           <View>
+            <Image source={require('./images/emergencia-medica.png')} style={{width: 50, height: 50}}/>
+           </View>
+           <View>
+             <Text style={styles.emergency_type}>
+               {this.props.data.emergency_type}
+             </Text>
+             <Text style={styles.address}>
+               {this.props.data.address}
+             </Text>
+             <Text style={styles.status}>
+               {this.props.data.status}
+             </Text>
+             <Text style={styles.created}>
+               {this.props.data.created}
+             </Text>
+             <Text style={styles.machines}>
+               {machines}
+             </Text>
+           </View>
          </View>
        </TouchableWithoutFeedback>
      );
