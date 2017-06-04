@@ -5,42 +5,43 @@ include 'simple_html_dom.php';
 // Create DOM from URL or file.
 $html = file_get_html('http://www.bomberosperu.gob.pe/po_diario.asp');
 
-// Find all links 
-
-$data = [];
-$map = [];
-// Find all article blocks
-
+$emergencies = [];
 $tr = $html->find('tr.TextoContenido');
-$img = $html->find('img');
-$replace = array("\r\n", '&nbsp;');
 
 foreach ($tr as $item) {
-  $data['id'] = $item->find('td div', 0)->plaintext;
-  $data['number'] = $item->find('td div', 1)->plaintext;
-  $data['created'] = $item->find('td div', 2)->plaintext;
-  $data['address'] = $item->find('td div', 3)->plaintext;
-  $data['emergency_type'] = $item->find('td div', 4)->plaintext;
-  $data['status'] = $item->find('td div', 5)->plaintext;
-  $data['machines'] = $item->find('td div', 6)->plaintext;
+  $emergency = [];
+  $emergency['id'] = _format_string($item->find('td div', 0)->plaintext);
+  $emergency['number'] = _format_string($item->find('td div', 1)->plaintext);
+  $emergency['created'] = _format_string($item->find('td div', 2)->plaintext);
+  $emergency['address'] = _format_string($item->find('td div', 3)->plaintext);
+  $emergency['emergency_type'] = _format_string($item->find('td div', 4)->plaintext);
+  $emergency['status'] = _format_string($item->find('td div', 5)->plaintext);
+  $emergency['machines'] = explode(' ', _format_string($item->find('td div', 6)->plaintext));
+  $content = explode("'", $item->find('td img', 0)->onclick);
+  // @TODO: Validate correctly if $content[i] is a valid lat or lon.
+  $emergency['map'] = [
+    'latitude' => !empty($content[1]) ? $content[1] : '',
+    'longitude' => !empty($content[3]) ? $content[3] : ''
+  ];
+  $emergencies[] = $emergency;
+}
 
-  //$pizza  = "porción1 porción2 porción3 porción4 porción5 porción6";
-  $machines = explode(" ", $data['machines']);
+print json_encode($emergencies);
+exit();
 
-  //print_r(str_replace("&nbsp;&nbsp;", "",$machines));
+/**
+ * Replaces awful characters, remove spaces, add html entity code.
+ * @param type $content
+ * @return type
+ */
+function _format_string($content) {
+  $content = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $content);
+  $content = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $content));
+  $content = html_entity_decode(htmlentities($content));
+  return $content;
+}
 
-  $json = json_encode(str_replace($replace, "",$machines));
-  print_r($json);
-
-  foreach( $img as $element) {
-  	$map['lat'] = $element->src;
-  	$map['long'] = $element->onclick;
-    $data['map'] = $map;
-  }
-
-  //print_r(str_replace("&nbsp;", "",$data));
-
-  $json = json_encode(str_replace("&nbsp;", "",$data));
-
-  //print_r($json);
-}  
+function _format_lat($content) {
+  $content = preg_replace("/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/", "", $content);  
+  return $content;
+}
