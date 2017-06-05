@@ -73,7 +73,6 @@
    render() {
      const machines = this.props.data.machines.toString();
      const emergency_type = this.props.data.emergency_type.replace(/\s+/g, '-').toLowerCase();
-     console.log(emergency_type);
      const IMAGES = {
        'accidente-vehicular': require('./images/accidente-vehicular.png'),
        'emergencia-medica': require('./images/emergencia-medica.png'),
@@ -140,17 +139,15 @@ export default class bomberos extends React.Component {
   };
 
   _onClick = (row) => {
-    row.clicks++;
-    console.log(row);
     //let url = 'waze://app';
     let url = `waze://?ll=${row.map.longitude},${row.map.latitude}&navigate=yes`;
-    console.log(url);
     Linking.canOpenURL(url).then(supported => {
-          if (supported) {
-            Linking.openURL(url);
-          } else {
-            console.log('Don\'t know how to open URI: ' + url);
-          }
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        // @TODO: Remove and use a Log technique.
+        console.log('Don\'t know how to open URI: ' + url);
+      }
     });
   };
 
@@ -163,7 +160,6 @@ export default class bomberos extends React.Component {
   async fetchData() {
     const response = await fetch(URL)
     const json = await response.json()
-    console.log(json);
 
     this.setState({rowData: json})
   }
