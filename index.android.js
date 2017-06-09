@@ -103,7 +103,7 @@
                {this.props.data.created}
              </Text>
              <Text style={style.machines}>
-               {machines}
+             {machines}
              </Text>
            </View>
            </View>
@@ -120,7 +120,6 @@ export default class bomberos extends React.Component {
   state = {
     isRefreshing: false,
     loaded: 0,
-    stars: '?',
     rowData: Array.from(new Array(1)).map(
       (val, i) => (
         {
@@ -152,7 +151,7 @@ export default class bomberos extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchData().done()
+    this.fetchData().done();
   }
   /**
    * Get firefighters data in json format.
@@ -189,21 +188,8 @@ export default class bomberos extends React.Component {
 
   _onRefresh = () => {
     this.setState({isRefreshing: true});
-    setTimeout(() => {
-      // prepend 2 items
-      const rowData = Array.from(new Array(2))
-      .map((val, i) => ({
-        text: 'Filas cargadas ' + (+this.state.loaded + i),
-        clicks: 0,
-      }))
-      .concat(this.state.rowData);
-
-      this.setState({
-        loaded: this.state.loaded + 10,
-        isRefreshing: false,
-        rowData: rowData,
-      });
-    }, 5000);
+    this.fetchData().done();
+    this.setState({isRefreshing: false});
   };
 }
 
