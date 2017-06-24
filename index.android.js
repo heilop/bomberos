@@ -117,20 +117,28 @@ export default class bomberos extends React.Component {
             progressBackgroundColor="#ffff00"
           />
         }>
-        <Text>
+        <Text style={styles.titleMain}>
           Bomberos Perú
         </Text>
-        <TouchableHighlight onPress={this._openEmergencyList}>
-          <Image source={require("./src/images/icons/flame_3.png")}/>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._openRadioScreen}>
-          <Image source={require("./src/images/icons/radio_white_3.png")}/>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._openThanksScreen}>
-          <Image source={require("./src/images/icons/helmet_white_3.png")}/>
-        </TouchableHighlight>
+        <View>
+          <View style={styles.leftNav}>
+            <TouchableHighlight onPress={this._openEmergencyList}>
+              <Image  source={require("./src/images/icons/flame_1.png")}/>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.centerNav}>
+            <TouchableHighlight onPress={this._openRadioScreen}>
+              <Image source={require("./src/images/icons/radio_white_1.png")}/>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.rightNav}>
+            <TouchableHighlight onPress={this._openThanksScreen}>
+              <Image  source={require("./src/images/icons/helmet_white_1.png")}/>
+            </TouchableHighlight>
+          </View>
+        </View>
         <TextInput
-          style={{height: 40}}
+          style={styles.searchForm}
           placeholder="Buscar por bomba"
           onChangeText={this._onChangeSearchText}
         />
@@ -151,6 +159,37 @@ const styles = StyleSheet.create({
   scrollview: {
     flex: 1,
   },
+  
+  searchForm: {
+    height: 60,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#CECECE',
+    textAlign: 'center',
+    color: '#CECECE',
+    margin: 5
+  },
+
+  titleMain: {
+    color: '#4A4A4A',
+    fontSize: 28,
+    marginTop: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'sans-serif'
+  },
+
+  leftNav: {
+    alignSelf: 'flex-start',
+  },
+
+  centerNav: {
+    alignSelf: 'center',
+  },
+
+  rightNav: {
+    alignSelf: 'flex-end',
+  }
 });
 
 AppRegistry.registerComponent('bomberos', () => bomberos);
