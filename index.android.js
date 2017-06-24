@@ -11,6 +11,7 @@
    StyleSheet,
    RefreshControl,
    Text,
+   TextInput,
    TouchableWithoutFeedback,
    View,
    Image,
@@ -31,6 +32,7 @@ export default class bomberos extends React.Component {
   state = {
     isRefreshing: false,
     loaded: 0,
+    text: '',
     rowData: Array.from(new Array(1)).map(
       (val, i) => (
         {
@@ -61,6 +63,11 @@ export default class bomberos extends React.Component {
     });
   };
 
+  _onChangeSearchText = (text) => {
+    console.log(text);
+    this.setState({text});
+  };
+
   componentDidMount() {
     this.fetchData().done();
     SplashScreen.hide();
@@ -77,7 +84,13 @@ export default class bomberos extends React.Component {
 
   render() {
     const rows = this.state.rowData.map((row, ii) => {
-      return <Emergency key={ii} data={row} onClick={this._onClick}/>;
+      // @TODO: Change machines to station.
+      if (row.machines.includes(this.state.text)) {
+        return <Emergency key={ii} data={row} onClick={this._onClick}/>;
+      }
+      else if(this.state.text == '') {
+        return <Emergency key={ii} data={row} onClick={this._onClick}/>;
+      }
     });
     return (
       <ScrollView
@@ -93,8 +106,17 @@ export default class bomberos extends React.Component {
             progressBackgroundColor="#ffff00"
           />
         }>
+        <TextInput
+          style={{height: 40}}
+          placeholder="Buscar por bomba"
+          onChangeText={this._onChangeSearchText}
+        />
+        <Text>
+          {this.state.text}
+        </Text>
         {rows}
       </ScrollView>
+
     );
   }
 
