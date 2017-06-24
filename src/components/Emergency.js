@@ -37,30 +37,34 @@ class Emergency extends React.Component {
     /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
     return (
      <TouchableWithoutFeedback onPress={this._onClick}>
-        <View style={styles.row}>
-         <View style={styles.content}>
-          <View style={styles.padding_top}>
-           <Image source={IMAGES[emergency_type]} style={{width: 50, height: 50}}/>
+         
+          <View style={styles.row}>   
+          <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>            
+           <View style={styles.content}>
+            <View style={styles.padding_top}>
+             <Image source={IMAGES[emergency_type]} style={{width: 50, height: 50}}/>
+            </View>
+            <View style={styles.text_center}>
+              <Text style={styles.emergency_type}>
+                {this.props.data.emergency_type}
+              </Text>
+              <Text style={styles.status}>
+                {this.props.data.status}
+              </Text>
+              <Text style={styles.address}>
+                {this.props.data.address}
+              </Text>
+              <Text style={styles.created}>
+                {this.props.data.created}
+              </Text>
+              <Text style={styles.machines}>
+              {machines}
+              </Text>
+            </View>
+            </View>
+            </Image>
           </View>
-          <View style={styles.text_center}>
-            <Text style={styles.emergency_type}>
-              {this.props.data.emergency_type}
-            </Text>
-            <Text style={styles.status}>
-              {this.props.data.status}
-            </Text>
-            <Text style={styles.address}>
-              {this.props.data.address}
-            </Text>
-            <Text style={styles.created}>
-              {this.props.data.created}
-            </Text>
-            <Text style={styles.machines}>
-            {machines}
-            </Text>
-          </View>
-          </View>
-        </View>
+        
       </TouchableWithoutFeedback>
     );
   }
@@ -70,6 +74,14 @@ const styles = StyleSheet.create({
   content:{
     flex:1,
     flexDirection: 'row'
+  },
+
+  backgroundImage: {
+    borderRadius: 10,
+    width: null,
+    marginRight: 4,
+    marginTop: 10,
+    resizeMode: 'cover'
   },
 
   padding_left: {
@@ -106,33 +118,33 @@ const styles = StyleSheet.create({
   machines: {
     color: 'black',
   },
+
   text_center: {
     textAlign: 'center',
     paddingLeft: 20
   },
-  row: {
-    borderWidth: 3,
-    padding: 20,
-    margin: 5,
-    borderRadius: 10,
-    borderColor: '#FF620E',
-  },
+
   scrollview: {
     flex: 1,
   },
+
   address: {
     alignSelf: 'center',
     color: 'red',
   },
+
   emergency_type: {
-    color: 'red',
+    color: 'white'
   },
+
   status: {
     color: 'red',
   },
+
   created: {
     color: 'red',
   },
+
   machines: {
     color: 'red',
   },
