@@ -56,7 +56,7 @@ class Emergency extends React.Component {
               </Text>
             </View>
            </View>
-           <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}/>
+           <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}></Image>
           </Image>
         </View>
       </TouchableWithoutFeedback>
@@ -68,6 +68,12 @@ const styles = StyleSheet.create({
   content:{
     flex:1,
     flexDirection: 'row'
+  },
+
+  row: {
+    borderRadius: 8,
+    backgroundColor: '#E83A4F',
+    margin: 5
   },
 
   iconPointer: {
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   backgroundImage: {
-    borderRadius: 10,
+    borderRadius: 5,
     width: null,
     marginRight: 4,
     marginTop: 10,
