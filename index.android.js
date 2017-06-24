@@ -42,6 +42,7 @@ export default class bomberos extends React.Component {
           created: '03/06/2017 09:53:42 a.m.',
           number: "2017-028208",
           machines: ["AMB124-2", "AMB-96"],
+          fire_stations: [],
           map: {
             "latitude": -76.9623405856671,
             "longitude": -12.0858319188482
@@ -85,7 +86,7 @@ export default class bomberos extends React.Component {
   render() {
     const rows = this.state.rowData.map((row, ii) => {
       // @TODO: Change machines to station.
-      if (row.machines.includes(this.state.text)) {
+      if (row.fire_stations.includes(this.state.text)) {
         return <Emergency key={ii} data={row} onClick={this._onClick}/>;
       }
       else if(this.state.text == '') {
