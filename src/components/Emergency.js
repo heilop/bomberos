@@ -51,8 +51,8 @@ class Emergency extends React.Component {
                 {this.props.data.address}
               </Text>
               <Text style={styles.created}>
-                <Image style={styles.created} source={require('../images/icons/clock_3.png')}/> {this.props.data.created}
-                <Image style={styles.machines} source={require('../images/icons/fire_truck_3.png')}/>{machines}
+                <Image style={styles.created} source={require('../images/icons/clock_2.png')}/> {this.props.data.created}
+                <Image style={styles.machines} source={require('../images/icons/fire_truck_2.png')}/>{machines}
               </Text>
             </View>
            </View>
@@ -73,12 +73,18 @@ const styles = StyleSheet.create({
   iconPointer: {
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
-    flex:0.09
+    flex:.45,
+    margin: 15,
+    marginBottom: 60,
+    width: 50,
+    height: 120,
+    borderRadius: 10
   },
 
   groupLeft: {
     alignSelf: 'flex-start',
-    flex:0.09
+    flex:.16,
+    marginTop: 17
   },
 
   backgroundImage: {
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
     width: null,
     marginRight: 4,
     marginTop: 10,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
   },
 
   padding_left: {
@@ -99,13 +105,17 @@ const styles = StyleSheet.create({
 
   created: {
     color:'white',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    bottom:0,
+    justifyContent: 'space-between',
+    marginTop: 10,
+    fontSize: 11,
   },
 
   status: {
-    color: 'white',
+    color: '#F6A623',
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 15,
     paddingBottom: 5
   },
 
@@ -116,7 +126,8 @@ const styles = StyleSheet.create({
 
   text_center: {
     textAlign: 'center',
-    paddingLeft: 20
+    paddingLeft: 20,
+    fontSize: 11,
   },
 
   scrollview: {
@@ -125,12 +136,13 @@ const styles = StyleSheet.create({
 
   address: {
     color: 'white',
+    fontSize: 11,
   },
 
   emergency_type: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 18
   },
 
 });
