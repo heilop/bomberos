@@ -17,6 +17,7 @@ foreach ($tr as $item) {
   $emergency['emergency_type'] = str_replace(" (INCIDENTE)", "", _format_string($item->find('td div', 4)->plaintext));
   $emergency['status'] = _format_string($item->find('td div', 5)->plaintext);
   $emergency['machines'] = explode(' ', _format_string($item->find('td div', 6)->plaintext));
+  $emergency['fire_stations'] = _get_fire_stations($emergency['machines']);
   $content = explode("'", $item->find('td img', 0)->onclick);
   // @TODO: Validate correctly if $content[i] is a valid lat or lon.
   $emergency['map'] = [
@@ -44,4 +45,23 @@ function _format_string($content) {
 function _format_lat($content) {
   $content = preg_replace("/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/", "", $content);
   return $content;
+}
+
+/**
+ * Get fire stations from machines list.
+ *
+ * @param array $machines
+ *   Machines array.
+ *
+ * @return array
+ *   Fire stations in array format.
+ */
+function _get_fire_stations($machines) {
+  $fireStations = [];
+  foreach ($machines as $machine) {
+    $machineDashReplace = preg_replace("/[^0-9-]/", '', $machine);
+    $machineDash = preg_split('/-/', $machineDashReplace, NULL, PREG_SPLIT_NO_EMPTY);
+    $fireStations[] = !empty($machineDash[0]) ? $machineDash[0] : '';
+  }
+  return $fireStations;
 }
