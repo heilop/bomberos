@@ -65,7 +65,6 @@ export default class bomberos extends React.Component {
   };
 
   _onChangeSearchText = (text) => {
-    console.log(text);
     this.setState({text});
   };
 
@@ -112,9 +111,6 @@ export default class bomberos extends React.Component {
           placeholder="Buscar por bomba"
           onChangeText={this._onChangeSearchText}
         />
-        <Text>
-          {this.state.text}
-        </Text>
         {rows}
       </ScrollView>
 
