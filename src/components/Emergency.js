@@ -36,12 +36,10 @@ class Emergency extends React.Component {
     };
     /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
     return (
-     <TouchableWithoutFeedback onPress={this._onClick}>
-         
-          <View style={styles.row}>   
+     <TouchableWithoutFeedback onPress={this._onClick}>     
+        <View style={styles.row}>   
           <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>            
-           <View style={styles.content}>
-
+           <View style={styles.groupLeft}>
             <View style={styles.text_center}>
               <Text style={styles.emergency_type}>
                 {this.props.data.emergency_type}
@@ -57,13 +55,10 @@ class Emergency extends React.Component {
                 <Image style={styles.machines} source={require('../images/icons/fire_truck_3.png')}/>{machines}
               </Text>
             </View>
-            <View style={styles.padding_top}>
-             <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}/>
-            </View>            
-            </View>
-            </Image>
-          </View>
-        
+           </View>
+           <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}/>
+          </Image>
+        </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -76,7 +71,14 @@ const styles = StyleSheet.create({
   },
 
   iconPointer: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    alignSelf: 'flex-end',
+    flex:0.09
+  },
+
+  groupLeft: {
+    alignSelf: 'flex-start',
+    flex:0.09
   },
 
   backgroundImage: {
@@ -103,7 +105,6 @@ const styles = StyleSheet.create({
   status: {
     color: 'white',
     fontWeight: '700',
-    textAlign:'center',
     fontSize: 18,
     paddingBottom: 5
   },
@@ -123,7 +124,6 @@ const styles = StyleSheet.create({
   },
 
   address: {
-    alignSelf: 'center',
     color: 'white',
   },
 
