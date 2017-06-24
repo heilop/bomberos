@@ -41,9 +41,7 @@ class Emergency extends React.Component {
           <View style={styles.row}>   
           <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>            
            <View style={styles.content}>
-            <View style={styles.padding_top}>
-             <Image source={IMAGES[emergency_type]} style={{width: 50, height: 50}}/>
-            </View>
+
             <View style={styles.text_center}>
               <Text style={styles.emergency_type}>
                 {this.props.data.emergency_type}
@@ -61,6 +59,9 @@ class Emergency extends React.Component {
               {machines}
               </Text>
             </View>
+            <View style={styles.padding_top}>
+             <Image source={require('../images/icons/pointer_1.png')} style={{width: 50, height: 50}}/>
+            </View>            
             </View>
             </Image>
           </View>
@@ -86,13 +87,6 @@ const styles = StyleSheet.create({
 
   padding_left: {
     paddingLeft: 15,
-  },
-
-  emergency_type: {
-    color: 'red',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 24
   },
 
   padding_top: {
@@ -134,7 +128,9 @@ const styles = StyleSheet.create({
   },
 
   emergency_type: {
-    color: 'white'
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
   },
 
   status: {
