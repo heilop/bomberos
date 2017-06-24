@@ -12,6 +12,7 @@
    RefreshControl,
    Text,
    TextInput,
+   TouchableHighlight,
    TouchableWithoutFeedback,
    View,
    Image,
@@ -68,6 +69,16 @@ export default class bomberos extends React.Component {
     this.setState({text});
   };
 
+  _openEmergencyListScreen = () => {
+    console.log('Opening emergency list screen');
+  };
+  _openRadioScreen = () => {
+    console.log('Opening radio screen');
+  };
+  _openThanksScreen = () => {
+    console.log('Opening thanks screen');
+  };
+
   componentDidMount() {
     this.fetchData().done();
     SplashScreen.hide();
@@ -106,6 +117,18 @@ export default class bomberos extends React.Component {
             progressBackgroundColor="#ffff00"
           />
         }>
+        <Text>
+          Bomberos Perú
+        </Text>
+        <TouchableHighlight onPress={this._openEmergencyList}>
+          <Image source={require("./src/images/icons/flame_3.png")}/>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._openRadioScreen}>
+          <Image source={require("./src/images/icons/radio_white_3.png")}/>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._openThanksScreen}>
+          <Image source={require("./src/images/icons/helmet_white_3.png")}/>
+        </TouchableHighlight>
         <TextInput
           style={{height: 40}}
           placeholder="Buscar por bomba"
