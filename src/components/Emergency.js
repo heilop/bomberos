@@ -53,14 +53,12 @@ class Emergency extends React.Component {
                 {this.props.data.address}
               </Text>
               <Text style={styles.created}>
-                {this.props.data.created}
-              </Text>
-              <Text style={styles.machines}>
-              {machines}
+                <Image style={styles.created} source={require('../images/icons/clock_3.png')}/> {this.props.data.created}
+                <Image style={styles.machines} source={require('../images/icons/fire_truck_3.png')}/>{machines}
               </Text>
             </View>
             <View style={styles.padding_top}>
-             <Image source={require('../images/icons/pointer_1.png')} style={{width: 50, height: 50}}/>
+             <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}/>
             </View>            
             </View>
             </Image>
@@ -75,6 +73,10 @@ const styles = StyleSheet.create({
   content:{
     flex:1,
     flexDirection: 'row'
+  },
+
+  iconPointer: {
+    justifyContent: 'flex-end'
   },
 
   backgroundImage: {
@@ -93,16 +95,13 @@ const styles = StyleSheet.create({
     paddingTop: 20
   },
 
-  address: {
-    color:'black'
-  },
-
   created: {
-    color:'black'
+    color:'white',
+    alignSelf: 'flex-start'
   },
 
   status: {
-    color: 'black',
+    color: 'white',
     fontWeight: '700',
     textAlign:'center',
     fontSize: 18,
@@ -110,7 +109,8 @@ const styles = StyleSheet.create({
   },
 
   machines: {
-    color: 'black',
+    color: 'white',
+    alignSelf: 'flex-end'
   },
 
   text_center: {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 
   address: {
     alignSelf: 'center',
-    color: 'red',
+    color: 'white',
   },
 
   emergency_type: {
@@ -133,17 +133,6 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
 
-  status: {
-    color: 'red',
-  },
-
-  created: {
-    color: 'red',
-  },
-
-  machines: {
-    color: 'red',
-  },
 });
 
 export default Emergency;
