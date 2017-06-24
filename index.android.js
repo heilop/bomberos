@@ -17,10 +17,12 @@
    Linking
  } = ReactNative;
 
- import { AppRegistry } from 'react-native';
-
+import { AppRegistry } from 'react-native';
  // Emergency.
 import Emergency from './src/components/Emergency';
+// Adds SpalshScreen thanks to crazycodeboy/react-native-splash-screen
+import SplashScreen from 'react-native-splash-screen'
+
 
 export default class bomberos extends React.Component {
   static title = '<RefreshControl>';
@@ -61,6 +63,7 @@ export default class bomberos extends React.Component {
 
   componentDidMount() {
     this.fetchData().done();
+    SplashScreen.hide();
   }
   /**
    * Get firefighters data in json format.
