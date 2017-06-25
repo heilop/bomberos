@@ -120,7 +120,7 @@ export default class bomberos extends React.Component {
         <Text style={styles.titleMain}>
           Bomberos Perú
         </Text>
-        <View>
+        <View style={styles.inlineNav}>
           <View style={styles.leftNav}>
             <TouchableHighlight onPress={this._openEmergencyList}>
               <Image  source={require("./src/images/icons/flame_1.png")}/>
@@ -141,6 +141,8 @@ export default class bomberos extends React.Component {
           style={styles.searchForm}
           placeholder="Buscar por bomba"
           onChangeText={this._onChangeSearchText}
+          underlineColorAndroid='transparent'
+          placeholderTextColor="#CECECE"
         />
         {rows}
       </ScrollView>
@@ -179,16 +181,11 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif'
   },
 
-  leftNav: {
-    alignSelf: 'flex-start',
-  },
-
-  centerNav: {
-    alignSelf: 'center',
-  },
-
-  rightNav: {
-    alignSelf: 'flex-end',
+  inlineNav: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    marginTop: 25,
+    marginBottom: 5
   }
 });
 
