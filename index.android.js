@@ -10,6 +10,7 @@
    ScrollView,
    StyleSheet,
    RefreshControl,
+   Button,
    Text,
    TextInput,
    TouchableHighlight,
@@ -23,10 +24,17 @@ import { AppRegistry } from 'react-native';
  // Emergency.
 import Emergency from './src/components/Emergency';
 // Adds SpalshScreen thanks to crazycodeboy/react-native-splash-screen
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
 
+import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 
-export default class bomberos extends React.Component {
+import { StackNavigator } from 'react-navigation';
+
+class EmergenciesListScreen extends React.Component {
+
+  static navigationOptions = {
+    header: null
+  };
   static title = '<RefreshControl>';
   static description = 'Adds pull-to-refresh support to a scrollview.';
 
@@ -69,16 +77,6 @@ export default class bomberos extends React.Component {
     this.setState({text});
   };
 
-  _openEmergencyListScreen = () => {
-    console.log('Opening emergency list screen');
-  };
-  _openRadioScreen = () => {
-    console.log('Opening radio screen');
-  };
-  _openThanksScreen = () => {
-    console.log('Opening thanks screen');
-  };
-
   componentDidMount() {
     this.fetchData().done();
     SplashScreen.hide();
@@ -94,6 +92,7 @@ export default class bomberos extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     const rows = this.state.rowData.map((row, ii) => {
       // @TODO: Change machines to station.
       if (row.fire_stations.includes(this.state.text)) {
@@ -122,17 +121,17 @@ export default class bomberos extends React.Component {
         </Text>
         <View style={styles.inlineNav}>
           <View style={styles.leftNav}>
-            <TouchableHighlight onPress={this._openEmergencyList}>
+            <TouchableHighlight onPress={() => navigate('EmergenciesListScreen')}>
               <Image  source={require("./src/images/icons/flame_1.png")}/>
             </TouchableHighlight>
           </View>
           <View style={styles.centerNav}>
-            <TouchableHighlight onPress={this._openRadioScreen}>
+            <TouchableHighlight onPress={() => navigate('RadioScreen')}>
               <Image source={require("./src/images/icons/radio_white_1.png")}/>
             </TouchableHighlight>
           </View>
           <View style={styles.rightNav}>
-            <TouchableHighlight onPress={this._openThanksScreen}>
+            <TouchableHighlight onPress={() => navigate('ThanksScreen')}>
               <Image  source={require("./src/images/icons/helmet_white_1.png")}/>
             </TouchableHighlight>
           </View>
@@ -157,11 +156,95 @@ export default class bomberos extends React.Component {
   };
 }
 
+class RadioScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+  turnOnOrOff() {
+    const url = "http://audio7.broadcastify.com/s4rn6m17kbhx.mp3";
+    ReactNativeAudioStreaming.play(url, {showIniOSMediaCenter: true, showInAndroidNotifications: true});
+  }
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View>
+        <Text style={styles.titleMain}>
+          Bomberos Perú
+        </Text>
+        <View style={styles.inlineNav}>
+          <View style={styles.leftNav}>
+            <TouchableHighlight onPress={() => navigate('EmergenciesListScreen')}>
+              <Image  source={require("./src/images/icons/flame_1.png")}/>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.centerNav}>
+            <TouchableHighlight onPress={() => navigate('RadioScreen')}>
+              <Image source={require("./src/images/icons/radio_white_1.png")}/>
+            </TouchableHighlight>
+          </View>
+          <View style={styles.rightNav}>
+            <TouchableHighlight onPress={() => navigate('ThanksScreen')}>
+              <Image  source={require("./src/images/icons/helmet_white_1.png")}/>
+            </TouchableHighlight>
+          </View>
+        </View>
+        <Text>Presionar para iniciar y vuelve a presionar para pausear</Text>
+        <TouchableHighlight onPress={this.turnOnOrOff}>
+          <Image  source={require("./src/images/icons/group.png")}/>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+}
+
+
+class ThanksScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    };
+    render() {
+        const { navigate } = this.props.navigation;
+        return (
+            <View>
+              <Text style={styles.titleMain}>
+                Bomberos Perú
+              </Text>
+              <View style={styles.inlineNav}>
+                <View style={styles.leftNav}>
+                  <TouchableHighlight onPress={() => navigate('EmergenciesListScreen')}>
+                    <Image  source={require("./src/images/icons/flame_1.png")}/>
+                  </TouchableHighlight>
+                </View>
+                <View style={styles.centerNav}>
+                  <TouchableHighlight onPress={() => navigate('RadioScreen')}>
+                    <Image source={require("./src/images/icons/radio_white_1.png")}/>
+                  </TouchableHighlight>
+                </View>
+                <View style={styles.rightNav}>
+                  <TouchableHighlight onPress={() => navigate('ThanksScreen')}>
+                    <Image  source={require("./src/images/icons/helmet_white_1.png")}/>
+                  </TouchableHighlight>
+                </View>
+              </View>
+              <Text>App mobile para que los bomberos pueden llegar rapido a emergencias diarias(y al hacer click se abre la app de waze con la ruta más corta para poder llegar rapido y así poder salvar vidas)
+                Creditos:
+                * Eduardo Telaya - luis.eduardo.telaya@gmail.com - edutrul
+                * Benji Santos - santsben@gmail.com - programemos
+                * Alexandra Bellido - alexandrabr23@gmail.com - alexabr23
+                Especial agradecimiento a:
+                Dios todo poderoso
+                David Antonio Vilca por el diseño de las apps(davidvilcao@gmail.com)
+                Todos los amigos, familiares por creer en nosotros y a los bomberos que se sacrificaron por nosotros y también por haber sino nuestros betatesters</Text>
+            </View>
+        );
+    }
+}
+
 const styles = StyleSheet.create({
   scrollview: {
     flex: 1,
   },
-  
+
   searchForm: {
     height: 60,
     borderRadius: 5,
@@ -188,5 +271,14 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
+
+const bomberos = StackNavigator(
+  {
+    EmergenciesListScreen: { screen: EmergenciesListScreen },
+    RadioScreen: { screen: RadioScreen },
+    ThanksScreen: { screen: ThanksScreen },
+  },
+  { headerMode: 'screen' }
+);
 
 AppRegistry.registerComponent('bomberos', () => bomberos);
