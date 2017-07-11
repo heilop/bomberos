@@ -36,29 +36,29 @@ class Emergency extends React.Component {
     };
     /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
     return (
-     <TouchableWithoutFeedback onPress={this._onClick}>
+      <TouchableWithoutFeedback onPress={this._onClick}>
         <View style={styles.row}>
-         <View style={styles.content}>
-          <View style={styles.padding_top}>
-           <Image source={IMAGES[emergency_type]} style={{width: 50, height: 50}}/>
-          </View>
-          <View style={styles.text_center}>
-            <Text style={styles.emergency_type}>
-              {this.props.data.emergency_type}
-            </Text>
-            <Text style={styles.status}>
-              {this.props.data.status}
-            </Text>
-            <Text style={styles.address}>
-              {this.props.data.address}
-            </Text>
-            <Text style={styles.created}>
-              {this.props.data.created}
-            </Text>
-            <Text style={styles.machines}>
-            {machines}
-            </Text>
-          </View>
+          <View style={styles.content}>
+            <View style={styles.padding_top}>
+              <Image source={IMAGES[emergency_type]} style={{ width: 50, height: 50 }} />
+            </View>
+            <View style={styles.text_center}>
+              <Text style={styles.emergency_type}>
+                {this.props.data.emergency_type}
+              </Text>
+              <Text style={styles.status}>
+                {this.props.data.status}
+              </Text>
+              <Text style={styles.address}>
+                {this.props.data.address}
+              </Text>
+              <Text style={styles.created}>
+                {this.props.data.created}
+              </Text>
+              <Text style={styles.machines}>
+                {machines}
+              </Text>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -67,8 +67,8 @@ class Emergency extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  content:{
-    flex:1,
+  content: {
+    flex: 1,
     flexDirection: 'row'
   },
 
@@ -88,17 +88,17 @@ const styles = StyleSheet.create({
   },
 
   address: {
-    color:'black'
+    color: 'black'
   },
 
   created: {
-    color:'black'
+    color: 'black'
   },
 
   status: {
     color: 'black',
     fontWeight: '700',
-    textAlign:'center',
+    textAlign: 'center',
     fontSize: 18,
     paddingBottom: 5
   },

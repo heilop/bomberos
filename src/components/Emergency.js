@@ -36,27 +36,27 @@ class Emergency extends React.Component {
     };
     /* @TODO: Replace <Image Source=... with this.props.data.emergency_type*/
     return (
-     <TouchableWithoutFeedback onPress={this._onClick}>     
-        <View style={styles.row}>   
-          <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>            
-           <View style={styles.groupLeft}>
-            <View style={styles.text_center}>
-              <Text style={styles.emergency_type}>
-                {this.props.data.emergency_type}
-              </Text>
-              <Text style={styles.status}>
-                {this.props.data.status}
-              </Text>
-              <Text style={styles.address}>
-                {this.props.data.address}
-              </Text>
-              <Text style={styles.created}>
-                <Image style={styles.created} source={require('../images/icons/clock_2.png')}/> {this.props.data.created}
-                <Image style={styles.machines} source={require('../images/icons/fire_truck_2.png')}/>{machines}
-              </Text>
+      <TouchableWithoutFeedback onPress={this._onClick}>
+        <View style={styles.row}>
+          <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>
+            <View style={styles.groupLeft}>
+              <View style={styles.text_center}>
+                <Text style={styles.emergency_type}>
+                  {this.props.data.emergency_type}
+                </Text>
+                <Text style={styles.status}>
+                  {this.props.data.status}
+                </Text>
+                <Text style={styles.address}>
+                  {this.props.data.address}
+                </Text>
+                <Text style={styles.created}>
+                  <Image style={styles.created} source={require('../images/icons/clock_2.png')} /> {this.props.data.created}
+                  <Image style={styles.machines} source={require('../images/icons/fire_truck_2.png')} />{machines}
+                </Text>
+              </View>
             </View>
-           </View>
-           <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}></Image>
+            <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}></Image>
           </Image>
         </View>
       </TouchableWithoutFeedback>
@@ -65,8 +65,8 @@ class Emergency extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  content:{
-    flex:1,
+  content: {
+    flex: 1,
     flexDirection: 'row'
   },
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   iconPointer: {
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
-    flex:.45,
+    flex: .45,
     margin: 15,
     marginBottom: 60,
     width: 50,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 
   groupLeft: {
     alignSelf: 'flex-start',
-    flex:.16,
+    flex: .16,
     marginTop: 17
   },
 
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
   },
 
   created: {
-    color:'white',
+    color: 'white',
     alignSelf: 'flex-start',
-    bottom:0,
+    bottom: 0,
     justifyContent: 'space-between',
     marginTop: 10,
     fontSize: 11,
