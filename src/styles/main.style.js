@@ -1,17 +1,22 @@
 import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
+    flex: 1,
+  },
+
   scrollview: {
     flex: 1,
   },
 
   searchForm: {
-    height: 60,
+    height: 50,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#CECECE',
     textAlign: 'center',
-    color: '#CECECE',
+    color: '#333',
     margin: 5
   },
 

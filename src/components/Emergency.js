@@ -48,11 +48,11 @@ class Emergency extends React.Component {
                   {this.props.data.status}
                 </Text>
                 <Text style={styles.address}>
-                  {this.props.data.address}
+                  {this.props.data.address.length > 70 ? `${this.props.data.address.slice(0, 70)}...` : this.props.data.address}
                 </Text>
                 <Text style={styles.created}>
-                  <Image style={styles.created} source={require('../images/icons/clock_2.png')} /> {this.props.data.created}
-                  <Image style={styles.machines} source={require('../images/icons/fire_truck_2.png')} />{machines}
+                  <Image source={require('../images/icons/clock_2.png')} /> {this.props.data.created}
+                  <Image source={require('../images/icons/fire_truck_2.png')} />{machines}
                 </Text>
               </View>
             </View>
@@ -73,24 +73,24 @@ const styles = StyleSheet.create({
   row: {
     borderRadius: 8,
     backgroundColor: '#E83A4F',
-    margin: 5
+    margin: 5,
   },
 
   iconPointer: {
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
-    flex: .45,
+    flex: .15,
     margin: 15,
     marginBottom: 60,
-    width: 50,
-    height: 120,
-    borderRadius: 10
+    width: 60,
+    height: 60,
+    resizeMode: 'contain',
   },
 
   groupLeft: {
     alignSelf: 'flex-start',
-    flex: .16,
-    marginTop: 17
+    flex: .85,
+    marginTop: 17,
   },
 
   backgroundImage: {
@@ -99,6 +99,8 @@ const styles = StyleSheet.create({
     marginRight: 4,
     marginTop: 10,
     resizeMode: 'cover',
+    flex: 1,
+    flexDirection: 'row'
   },
 
   padding_left: {
@@ -131,9 +133,7 @@ const styles = StyleSheet.create({
   },
 
   text_center: {
-    textAlign: 'center',
     paddingLeft: 20,
-    fontSize: 11,
   },
 
   scrollview: {
