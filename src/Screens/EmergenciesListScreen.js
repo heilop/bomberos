@@ -110,8 +110,6 @@ class EmergenciesListScreen extends React.Component {
                 tintColor="#ff0000"
                 title="Cargando..."
                 titleColor="#333"
-                colors={['#ff0000', '#00ff00', '#0000ff']}
-                progressBackgroundColor="#ffff00"
               />
             }
           />

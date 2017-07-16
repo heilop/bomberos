@@ -39,24 +39,30 @@ class Emergency extends React.Component {
       <TouchableWithoutFeedback onPress={this._onClick}>
         <View style={styles.row}>
           <Image style={styles.backgroundImage} source={require('../images/background/card_active_1.png')}>
-            <View style={styles.groupLeft}>
-              <View style={styles.text_center}>
-                <Text style={styles.emergency_type}>
-                  {this.props.data.emergency_type}
-                </Text>
-                <Text style={styles.status}>
-                  {this.props.data.status}
-                </Text>
-                <Text style={styles.address}>
-                  {this.props.data.address.length > 70 ? `${this.props.data.address.slice(0, 70)}...` : this.props.data.address}
-                </Text>
-                <Text style={styles.created}>
-                  <Image source={require('../images/icons/clock_2.png')} /> {this.props.data.created}
-                  <Image source={require('../images/icons/fire_truck_2.png')} />{machines}
-                </Text>
+            <View style={{ flex: 1, flexDirection: 'row'}}>
+              <View style={styles.groupLeft}>
+                <View style={styles.text_center}>
+                  <Text style={styles.emergency_type}>
+                    {this.props.data.emergency_type}
+                  </Text>
+                  <Text style={styles.status}>
+                    {this.props.data.status}
+                  </Text>
+                  <Text style={styles.address}>
+                    {this.props.data.address.length > 60 ? `${this.props.data.address.slice(0, 60)}...` : this.props.data.address}
+                  </Text>
+                </View>
+              </View>
+              <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}></Image>
+            </View>
+            <View style={styles.created}>
+              <View style={[styles.block, {marginLeft: 10}]}>
+                <Image source={require('../images/icons/clock_2.png')} /><Text style={styles.textDetail}>{this.props.data.created}</Text>
+              </View>
+              <View style={styles.block}>
+                <Image source={require('../images/icons/fire_truck_2.png')} /><Text style={styles.textDetail}>{machines.length > 10 ? `${machines.slice(0, 10)}...` : machines}</Text>
               </View>
             </View>
-            <Image style={styles.iconPointer} source={require('../images/icons/pointer_1.png')}></Image>
           </Image>
         </View>
       </TouchableWithoutFeedback>
@@ -77,11 +83,10 @@ const styles = StyleSheet.create({
   },
 
   iconPointer: {
-    justifyContent: 'flex-end',
-    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignSelf: 'center',
     flex: .15,
     margin: 15,
-    marginBottom: 60,
     width: 60,
     height: 60,
     resizeMode: 'contain',
@@ -99,8 +104,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
     marginTop: 10,
     resizeMode: 'cover',
-    flex: 1,
-    flexDirection: 'row'
+   flex: 1
   },
 
   padding_left: {
@@ -112,12 +116,24 @@ const styles = StyleSheet.create({
   },
 
   created: {
-    color: 'white',
-    alignSelf: 'flex-start',
-    bottom: 0,
+    flex: .5,
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    alignItems: 'center',
+    margin: 15,
+  },
+
+  block: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  textDetail: {
+    color: 'white',
     fontSize: 11,
+    marginLeft: 5
   },
 
   status: {
@@ -125,11 +141,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 15,
     paddingBottom: 5
-  },
-
-  machines: {
-    color: 'white',
-    alignSelf: 'flex-end'
   },
 
   text_center: {
